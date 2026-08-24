@@ -1,19 +1,21 @@
-import { useState } from 'react'
+export default function Country({ id, name, gold, onAddGold, onDeleteCountry }) {
+  const handleAddGold = () => {
+    onAddGold(id)
+  }
 
-export default function Country() {
-  const [name] = useState('United States')
-  const [gold, setGold] = useState(0)
-
-  const handleClick = () => {
-    setGold((currentGold) => currentGold + 1)
+  const handleDelete = () => {
+    onDeleteCountry(id)
   }
 
   return (
     <section className="country-card">
       <h2>{name}</h2>
       <p>Gold medals: {gold}</p>
-      <button type="button" onClick={handleClick}>
+      <button type="button" onClick={handleAddGold}>
         Add Gold Medal
+      </button>
+      <button type="button" onClick={handleDelete}>
+        Delete Country
       </button>
     </section>
   )
