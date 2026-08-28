@@ -1,20 +1,19 @@
-export default function Country({ id, name, gold, onAddGold, onDeleteCountry }) {
-  const handleAddGold = () => {
-    onAddGold(id)
-  }
+import Medal from './Medal'
 
-  const handleDelete = () => {
-    onDeleteCountry(id)
-  }
+export default function Country({ country, onIncrement, onDecrement, onDelete }) {
+  const { id, name, gold, silver, bronze } = country
+  const countryTotal = gold + silver + bronze
 
   return (
     <section className="country-card">
       <h2>{name}</h2>
-      <p>Gold medals: {gold}</p>
-      <button type="button" onClick={handleAddGold}>
-        Add Gold Medal
-      </button>
-      <button type="button" onClick={handleDelete}>
+      <p className="country-total">{countryTotal} total medals</p>
+      <div className="medals">
+        <Medal type="gold" count={gold} countryId={id} onIncrement={onIncrement} onDecrement={onDecrement} />
+        <Medal type="silver" count={silver} countryId={id} onIncrement={onIncrement} onDecrement={onDecrement} />
+        <Medal type="bronze" count={bronze} countryId={id} onIncrement={onIncrement} onDecrement={onDecrement} />
+      </div>
+      <button className="delete-button" type="button" onClick={() => onDelete(id)}>
         Delete Country
       </button>
     </section>
